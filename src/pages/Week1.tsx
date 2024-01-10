@@ -27,6 +27,8 @@ const EditName = ( { name, edit, id }: childType) => {
   // ~import { ChangeEvent, MouseEvent } from 'react'
   // ~MouseEvent<HTMLInputElement>
   // ~ChangeEvent<HTMLInputElement>
+  // ~ChangeEvent<HTMLSelectElement>
+  // ~MouseEvent<HTMLAnchorElement>
 
   function handlerEdit (e: ChangeEvent<HTMLInputElement>){
     setText(e.target.value);
