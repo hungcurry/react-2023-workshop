@@ -80,24 +80,24 @@ type HistoryType = {
   setCart: (obj: obj[]) => void,
 }
 function Menu({ products, cart, setCart }: MenuType) {
-    const handlerAddCart = (product: obj) => {
-      const isfind = cart.some(item => item.id === product.id)
-      if (isfind) {
-        // ~縮寫 return item.id === product.id ? { ...item, num: (item.num ?? 0) + 1 } : item
-        const ary = cart.map((item) => {
-          if (item.id === product.id) {
-            return {
-              ...item,
-              num: (item.num ?? 0) + 1
-            };
-          }
-          // 如果不符合條件，保持原樣
-          return item;
-        })
-        setCart(ary);
-      } else {
-        setCart([ ...cart, { ...product, num: 1 }]) // 製作新陣列
-      }
+  const handlerAddCart = (product: obj) => {
+    const isfind = cart.some(item => item.id === product.id)
+    if (isfind) {
+      // ~縮寫 return item.id === product.id ? { ...item, num: (item.num ?? 0) + 1 } : item
+      const ary = cart.map((item) => {
+        if (item.id === product.id) {
+          return {
+            ...item,
+            num: (item.num ?? 0) + 1
+          };
+        }
+        // 如果不符合條件，保持原樣
+        return item;
+      })
+      setCart(ary);
+    } else {
+      setCart([ ...cart, { ...product, num: 1 }]) // 製作新陣列
+    }
   }
   return (
     <div className='list-group'>
@@ -163,7 +163,6 @@ function ShoppingCart({ cart, setCart, orderList, setOrderList }: CartType) {
     commit.current.value = ''
     setCart([])
   }
-
   return (
     <>
       <div className="outer">
@@ -223,7 +222,7 @@ function ShoppingCart({ cart, setCart, orderList, setOrderList }: CartType) {
         <button type='button' className='btn btn-primary float-end' onClick={ handlerCreateOrder }>送出</button>
       </div>
     </>
-  );
+  )
 }
 function History({ order, setCart } : HistoryType) {
   const addCart = (e:MouseEvent<HTMLAnchorElement>) => {
@@ -267,11 +266,11 @@ function History({ order, setCart } : HistoryType) {
         { <small className=''>備註: { order.commit || '無備註'}</small> }
       </div>
     </div>
-  );
+  )
 }
 
 const Week2: React.FC = () => {
-  const [products] = useState(data)
+  const [products] = useState<obj[]>(data)
   const [cart, setCart] = useState<obj[]>([])
   const [orderList, setOrderList] = useState<sendObj[]>([])
 
