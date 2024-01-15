@@ -6,9 +6,9 @@ const Header: React.FC = () => {
       {/* NavLink */}
       <header>
         <div className="nav-link">
-          <NavLink to="/">
+          {/* <NavLink to="/">
             <p>Home</p>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink to="/week1">
             <p>week1頁面</p>
@@ -16,6 +16,10 @@ const Header: React.FC = () => {
 
           <NavLink to="/week2">
             <p>week2頁面</p>
+          </NavLink>
+
+          <NavLink to="/week3">
+            <p>week3頁面</p>
           </NavLink>
 
         </div>

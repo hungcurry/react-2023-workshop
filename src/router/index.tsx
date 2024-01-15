@@ -5,6 +5,7 @@ import { useRoutes } from 'react-router-dom'
 import Home from '@/pages/Home.tsx'
 import Week1 from "@/pages/Week1.tsx"
 import Week2 from "@/pages/Week2.tsx"
+import Week3 from "@/pages/Week3.tsx"
 
 const routes = [
   {
@@ -18,6 +19,10 @@ const routes = [
   {
     path: '/week2',
     element: <Week2 />,
+  },
+  {
+    path: '/week3',
+    element: <Week3 />,
   },
 ]
 
