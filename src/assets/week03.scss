@@ -346,7 +346,7 @@ nav ul a span {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    margin: 48px auto 48px auto;
+    // margin: 48px auto 48px auto;
     padding: 48px 31px;
   }
 }
@@ -477,6 +477,8 @@ nav ul a span {
   border: 1px solid #9F9A91;
   border-radius: 5px;
   margin-right: 16px;
+  margin-bottom: 15px;
+  display: inline-block;
 }
 
 .todoList_list .todoList_items .todoList_input:checked ~ span {
