@@ -15,14 +15,18 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
+    "strict": true, // 嚴格模式
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     
     /* Coustom */
-    "inlineSourceMap": true, 
-    "baseUrl": "./",
+    "allowJs": true, // 允許 import js
+    "esModuleInterop": false, // 不使用 esModuleInterop
+    "allowSyntheticDefaultImports": true, // 允許 import default
+    "forceConsistentCasingInFileNames": true, // 強制檔案名稱大小寫一致
+    "inlineSourceMap": true, // 產生 inline source map
+    "baseUrl": "./", 
     "paths": {
       "@/*": ["src/*"]
     }

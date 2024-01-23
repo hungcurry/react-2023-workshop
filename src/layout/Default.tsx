@@ -10,7 +10,7 @@ const Default: React.FC = () => {
   return (
     <>
       <Header />
-      <hr />
+      <hr className='m-10px mt-4px'/>
       <div className="container">
       {/* 使用物件index.tsx 來管理路由 */}
         <Router />

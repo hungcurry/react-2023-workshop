@@ -12,13 +12,6 @@ p {
   margin: 0;
   padding: 0;
 }
-.container {
-  /* box-sizing: border-box; */
-  /* height: 100%; */
-  /* margin: 12px auto;
-  padding: 0 12px; */
-  /* overflow: hidden; */
-}
 .nav-link {
   display: flex;
 }
@@ -78,7 +71,7 @@ footer {
 }
 .button{
   border: none;
-  background-color: var(--black);
+  background-color: #663dfa;
   color: var(--white);
   border-radius: 10px;
   margin: 0 10px;
@@ -92,12 +85,11 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: rgb(219, 238, 245);
   padding: 10px;
 }
 input{
   padding: 5px;
 }
 .active{
-  background-color: #dfdfdf;
+  background-color: #e7d1ff;
 }

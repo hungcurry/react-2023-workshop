@@ -261,23 +261,39 @@ nav ul a span {
   color: #9F9A91;
 }
 
-.formControls .formControls_btnSubmit {
+.btnTab {
   width: 128px;
-  /* height: 48px;
-  line-height: 48px; */
-  border: none;
+  background-color: #fff;
+  color: #333333;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  padding: 8px 16px;
+  display: block;
+  &.active{
+    background: #3a04fa;
+    color: #fff;
+  }
+}
+
+.btnSubmit {
+  width: 128px;
   border-radius: 10px;
   background: #333333;
   color: #fff;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  /* margin: 24px 0; */
+  -ms-grid-row-align: center;
+  align-self: center;
   font-weight: bold;
   cursor: pointer;
   text-align: center;
   font-size: 1rem;
   padding: 12px 16px;
+  display: block;
 }
 
 .formControls a {
@@ -290,7 +306,7 @@ nav ul a span {
   font-size: 0.875rem;
 }
 
-.formControls .formControls_btnLink {
+.formControls_btnLink {
   display: block;
   color: #333333;
   font-weight: bold;
@@ -319,7 +335,7 @@ nav ul a span {
         -ms-flex-direction: column;
             flex-direction: column;
     margin: 0 auto;
-    padding: 48px 31px;
+    padding: 24px 31px;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: start;
@@ -347,7 +363,7 @@ nav ul a span {
         -ms-flex-direction: column;
             flex-direction: column;
     // margin: 48px auto 48px auto;
-    padding: 48px 31px;
+    padding: 24px 31px;
   }
 }
 
