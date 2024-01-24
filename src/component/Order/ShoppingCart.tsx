@@ -3,8 +3,6 @@ import { useMemo, useRef } from 'react'
 import { CartType } from '@/Type'
 
 const ShoppingCart = ({ cart, setCart, orderList, setOrderList }: CartType) => {
-
-  const commit = useRef<HTMLTextAreaElement>(null);
   // ~產生1~20 數值序列
   const numOption = Array.from({ length: 20 }, (_, index) => {
     return index + 1;
@@ -16,17 +14,18 @@ const ShoppingCart = ({ cart, setCart, orderList, setOrderList }: CartType) => {
     },0);
     return total
   }, [cart])
+  const commit = useRef<HTMLTextAreaElement>(null)
 
-  const handlerChangNum = (id: number, e: ChangeEvent<HTMLSelectElement>) => {
+  const handlerChangNum = (e: ChangeEvent<HTMLSelectElement> , id: number) => {
     setCart(
       cart.map((item) => ({
         ...item,
-        num: item.id === id ? + e.target.value : item.num,
+        num: item.id === id ? Number(e.target.value) : item.num,
       }))
-    );
+    )
   }
-  const handlerDeleteCart = (id:number) => {
-    setCart(cart.filter((item) => item.id !== id));
+  const handlerDeleteCart = (id: number) => {
+    setCart(cart.filter((item) => item.id !== id))
   }
   const handlerCreateOrder = () => {
     if (!commit.current?.value) {
@@ -50,7 +49,7 @@ const ShoppingCart = ({ cart, setCart, orderList, setOrderList }: CartType) => {
       <div className="outer px-2 py-4">
         <table className='table table-sm table-hover text-center align-middle'>
           <thead>
-            <tr>
+            <tr className='bg-violet-200'>
               <th scope='col'>操作</th>
               <th scope='col'>品項</th>
               <th scope='col'>單價(元)</th>
@@ -61,7 +60,7 @@ const ShoppingCart = ({ cart, setCart, orderList, setOrderList }: CartType) => {
           <tbody>
             {
               cart.map((item) => (
-                <tr key={item.id}>
+                <tr key={ item.id }>
                   <td>
                     <button
                       type='button'
@@ -74,11 +73,9 @@ const ShoppingCart = ({ cart, setCart, orderList, setOrderList }: CartType) => {
                   <td>{ item.price }</td>
                   <td>
                     <select
-                      className='form-select form-select-sm'
-                      aria-label='Default select example'
-                      value={ item.num }
-                      onChange={ (e) => handlerChangNum(item.id, e) }
-                      >
+                        className='form-select form-select-sm'
+                        value={ item.num }
+                        onChange={ (e) => handlerChangNum(e,item.id) }>
                       {
                         numOption.map((number) => (
                           <option value={ number } key={ number }>{ number }</option>
@@ -93,14 +90,14 @@ const ShoppingCart = ({ cart, setCart, orderList, setOrderList }: CartType) => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan={4} className='text-end'>總計</td>
+              <td colSpan={ 4 } className='text-end'>總計</td>
               <td>$ { totalPrice }</td>
             </tr>
           </tfoot>
         </table>
       </div>
       <div className='orderList'>
-        <textarea className='form-control mb-3' rows={3} placeholder='備註' ref={ commit }></textarea>
+        <textarea className='form-control mb-3' rows={ 3 } placeholder='備註' ref={ commit }></textarea>
         <button type='button' className='btn btn-primary float-end' onClick={ handlerCreateOrder }>送出</button>
       </div>
     </>

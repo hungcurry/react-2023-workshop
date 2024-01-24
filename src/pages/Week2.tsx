@@ -82,13 +82,13 @@ const Week2: React.FC = () => {
           <h2 className='title text-20px text-center my-3'>歷史訂單</h2>
           { orderList.length
             ? <div className='row gy-3'>
-                {
-                  orderList.sort((pre,next) => next.created - pre.created).map(order => (
-                    <div className='col-12 col-md-6' key={ order.created }>
-                      <History order={ order } setCart={ setCart } />
-                    </div>
-                  ))
-                }
+              {
+                orderList.sort((pre,next) => next.created - pre.created).map(order => (
+                  <div className='col-12 col-md-6' key={ order.created }>
+                    <History order={ order } setCart={ setCart } />
+                  </div>
+                ))
+              }
               </div>
             : <div className='alert alert-info text-center' role='alert'>尚未建立訂單！</div>
           }

@@ -10,12 +10,12 @@ const Menu = ({ products, cart, setCart }: MenuType) => {
           return {
             ...item,
             num: (item.num ?? 0) + 1
-          };
+          }
         }
         // 如果不符合條件，保持原樣
-        return item;
+        return item
       })
-      setCart(ary);
+      setCart(ary)
     } else {
       setCart([ ...cart, { ...product, num: 1 }]) // 製作新陣列
     }
