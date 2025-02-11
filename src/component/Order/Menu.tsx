@@ -1,8 +1,15 @@
-import { TDrinks, MenuType } from '@/Type'
+import { TDrinks } from '@/Type'
 
-const Menu = ({ products, cart, setCart }: MenuType) => {
+type TPropsMenu = {
+  products: TDrinks[]
+  cart: TDrinks[]
+  setCart: (obj: TDrinks[]) => void
+}
+
+const Menu = ({ products, cart, setCart }: TPropsMenu) => {
   const handlerAddCart = (product: TDrinks) => {
     const isfind = cart.some((item) => item.id === product.id)
+
     if (isfind) {
       // ~縮寫 return item.id === product.id ? { ...item, num: (item.num ?? 0) + 1 } : item
       const ary = cart.map((item) => {
@@ -17,7 +24,9 @@ const Menu = ({ products, cart, setCart }: MenuType) => {
       })
       setCart(ary)
     } else {
-      setCart([...cart, { ...product, num: 1 }]) // 製作新陣列
+      // 製作新陣列 記憶體有變 React 才會重新渲染, 不能用push() 媽的...
+      const newCart = [...cart, { ...product, num: 1 }]
+      setCart(newCart)
     }
   }
   return (

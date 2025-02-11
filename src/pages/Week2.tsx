@@ -1,11 +1,11 @@
 import Menu from '@/component/Order/Menu'
 import ShoppingCart from '@/component/Order/ShoppingCart'
 import History from '@/component/Order/History'
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useMemo } from 'react'
 import { TDrinks, sendObj } from '@/Type'
 
 let idx = 1
-const data = [
+const data: TDrinks[] = [
   {
     id: idx++,
     name: '珍珠奶茶',
@@ -59,6 +59,13 @@ const Week2: React.FC = () => {
   const [products] = useState<TDrinks[]>(data)
   const [cart, setCart] = useState<TDrinks[]>([])
   const [orderList, setOrderList] = useState<sendObj[]>([])
+
+  // ~類似Vue Computed
+  const sortOrderList = useMemo(() => {
+    const ary = orderList.sort((pre, next) => next.created - pre.created)
+    return ary
+  }, [orderList])
+
   return (
     <>
       <div className='order py-3'>
@@ -89,13 +96,11 @@ const Week2: React.FC = () => {
           <h2 className='title text-20px text-center my-3'>歷史訂單</h2>
           {orderList.length ? (
             <div className='row gy-3'>
-              {orderList
-                .sort((pre, next) => next.created - pre.created)
-                .map((order) => (
-                  <div className='col-12 col-md-6' key={order.created}>
-                    <History order={order} setCart={setCart} />
-                  </div>
-                ))}
+              {sortOrderList.map((order) => (
+                <div className='col-12 col-md-6' key={order.created}>
+                  <History order={order} setCart={setCart} />
+                </div>
+              ))}
             </div>
           ) : (
             <div className='alert alert-info text-center' role='alert'>
