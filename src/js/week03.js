@@ -329,7 +329,7 @@ const TodoList = ({ token }) => {
     </>
   )
 }
-const Week3: React.FC= () => {
+const Week3 = () => {
   const [token, setToken] = useState("")
   return (
     <>
