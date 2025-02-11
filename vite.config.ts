@@ -5,7 +5,7 @@ import UnoCSS from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production ' ? '/react-week1/' : '',
+  base: process.env.NODE_ENV === 'production ' ? '/react-2023-workshop/' : '',
   plugins: [
     react(),
     UnoCSS(),

@@ -1,8 +1,9 @@
 import Input from '@/component/Input'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import { TDrinks } from '@/Type'
 
 let idx = 1
-const data = [
+const data: TDrinks[] = [
   {
     id: idx++,
     name: '珍珠奶茶',
@@ -63,35 +64,70 @@ const data = [
 const Week1: React.FC = () => {
   const [str] = useState('Week1')
   const [products, setProducts] = useState(data)
-  const handlerPatchProduct =(id: number, str: string) =>{
+
+  const handlerPatchProduct = (id: number, str: string) => {
     const ary = products.map((product) => {
       if (product.id === id) {
+        const currentNum = product.num ?? 0
         return {
           ...product,
-          num: str === 'add' ? (product.num += 1) : (product.num > 0 ? product.num -= 1 : 0),
+          num: str === 'add' ? currentNum + 1 : Math.max(currentNum - 1, 0),
         }
       }
       return product
     })
     setProducts(ary)
   }
-  const handlerChangeName =(id: number,text: string) => {
-    const ary = products.map((product) => {
-      // ~縮寫 return product.id === id ? { ...product, name: text } : product
-      if (product.id === id) {
-        return {
-          ...product,
-          name: text,
+  const handlerChangeName = useCallback(
+    (id: number, text: string) => {
+      const ary = products.map((product) => {
+        // ~縮寫 return product.id === id ? { ...product, name: text } : product
+        if (product.id === id) {
+          return {
+            ...product,
+            name: text,
+          }
         }
-      }
-      return product
-    })
-    setProducts(ary)
+        return product
+      })
+      setProducts(ary)
+    },
+    [products],
+  )
+  const handleRender = (product: TDrinks) => {
+    return (
+      <tr key={product.id}>
+        <td>
+          <Input id={product.id} name={product.name} edit={handlerChangeName} />
+        </td>
+        <td>
+          <small>{product.content}</small>
+        </td>
+        <td>{product.price}</td>
+        <td className='w-200px'>
+          <button
+            type='button'
+            className='button'
+            onClick={() => handlerPatchProduct(product.id, 'cut')}
+          >
+            <span>-</span>
+          </button>
+          <span className='inline-block w-20px text-center'>{product.num}</span>
+          <button
+            type='button'
+            className='button'
+            onClick={() => handlerPatchProduct(product.id, 'add')}
+          >
+            <span>+</span>
+          </button>
+        </td>
+      </tr>
+    )
   }
   return (
     <>
-      <h2 className='title my-3 text-20px'>{ str }</h2>
-      <div className="outer">
+      <h2 className='title my-3 text-20px'>{str}</h2>
+      <div className='outer'>
         <table className='table'>
           <thead>
             <tr>
@@ -102,41 +138,7 @@ const Week1: React.FC = () => {
             </tr>
           </thead>
 
-          <tbody>
-            {
-              products.map((product) => (
-                <tr key={ product.id }>
-                  <td>
-                    <Input id={ product.id } name={ product.name }
-                      edit={ handlerChangeName } 
-                    />
-                  </td>
-                  <td>
-                    <small>{ product.content }</small>
-                  </td>
-                  <td>{ product.price }</td>
-                  <td className='w-200px'>
-                    <button
-                      type='button' className='button'
-                      onClick={ () => handlerPatchProduct(product.id, 'cut') }
-                    >
-                      <span>-</span>
-                    </button>
-                    <span className='inline-block w-20px text-center'>
-                      { product.num }
-                    </span>
-                    <button
-                      type='button' className='button'
-                      onClick={ () => handlerPatchProduct(product.id, 'add') }
-                    >
-                      <span>+</span>
-                    </button>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-
+          <tbody>{products.map((product) => handleRender(product))}</tbody>
         </table>
       </div>
     </>

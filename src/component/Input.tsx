@@ -1,59 +1,79 @@
 import { ChangeEvent } from 'react'
-import { useState ,useEffect ,useRef } from 'react'
+import { useState, useEffect, useRef, memo } from 'react'
 
-type childType = { 
-  name: string, 
-  edit: (id: number, text: string) => void, 
-  id: number 
+type TPropsInput = {
+  name: string
+  edit: (id: number, text: string) => void
+  id: number
 }
-const Input = ( { name, edit, id }: childType ) => {
+
+const Input = memo(({ name, edit, id }: TPropsInput) => {
   const [toggle, setToggle] = useState(false)
   const [text, setText] = useState(name)
   const inputRef = useRef<HTMLInputElement>(null)
   const spanRef = useRef<HTMLSpanElement>(null)
 
+  // 處理父元素 TR 的樣式
   useEffect(() => {
-    // console.log('useEffect', toggle );
-    if (toggle === true) {
-      // console.log(`inputRef` , inputRef);
-      const parentElementTD = inputRef.current?.parentNode?.parentNode?.parentNode as HTMLElement;
-      parentElementTD?.classList.add('active');
-    }else {
-      const parentElementTD = spanRef.current?.parentNode?.parentNode as HTMLElement;
-      parentElementTD?.classList.remove('active');
-    }
-  }, [toggle]);
+    // if (toggle === true) {
+    //   const parentTR = inputRef.current?.closest('tr')
+    //   console.log(parentTR)
 
+    //   parentTR?.classList.add('active')
+    // } else {
+    //   const parentTR = spanRef.current?.closest('tr')
+    //   parentTR?.classList.remove('active')
+    // }
+
+    const parentTR = (toggle ? inputRef.current : spanRef.current)?.closest(
+      'tr',
+    )
+    parentTR?.classList[toggle ? 'add' : 'remove']('active')
+  }, [toggle])
+
+  // #region event型別
   // !event型別
   // ~import { ChangeEvent, MouseEvent } from 'react'
   // ~MouseEvent<HTMLInputElement>
   // ~ChangeEvent<HTMLInputElement>
   // ~ChangeEvent<HTMLSelectElement>
   // ~MouseEvent<HTMLAnchorElement>
-
-  const handlerEdit = (e: ChangeEvent<HTMLInputElement>) =>{
+  // #endregion
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
   }
-  const handlerSave =()=> {
-    edit(id , text)
-    setToggle(!toggle)
+  const handleSave = () => {
+    edit(id, text)
+    setToggle(false)
   }
-  const handlerToggle =() =>{
-    setToggle(!toggle)
+  const handleToggle = () => {
+    setToggle(true)
   }
   return (
     <>
-      { toggle 
-        ? <div className="box bg-violet-100">
-            {/* 這邊要綁props的text資料才會連動 */}
-            <input ref={ inputRef } className='border-0 mb-2 w-160px' type='text' id='name' name='name' 
-              value={ text } onChange={ handlerEdit }
-            />
-            <button className='border-0 bg-violet-300 py-4px' onClick={ handlerSave }>更改</button>
-          </div>
-        : <span ref={ spanRef } onClick={ handlerToggle }>{ name }</span>
-      }
+      {toggle ? (
+        <div className='box bg-violet-100'>
+          {/* 這邊要綁props的text資料才會連動 */}
+          <input
+            ref={inputRef}
+            className='border-0 mb-2 w-160px'
+            type='text'
+            value={text}
+            onChange={handleInputChange}
+          />
+          <button
+            className='border-0 bg-violet-300 py-4px'
+            onClick={handleSave}
+          >
+            更改
+          </button>
+        </div>
+      ) : (
+        <span ref={spanRef} onClick={handleToggle}>
+          {name}
+        </span>
+      )}
     </>
   )
-}
+})
 export default Input
