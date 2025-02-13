@@ -1,36 +1,35 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
+    "jsx": "react-jsx",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "useDefineForClassFields": true,
+    "baseUrl": "./",
     "module": "ESNext",
-    "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true, // 嚴格模式
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    
-    /* Coustom */
-    "allowJs": true, // 允許 import js
-    "esModuleInterop": false, // 不使用 esModuleInterop
-    "allowSyntheticDefaultImports": true, // 允許 import default
-    "forceConsistentCasingInFileNames": true, // 強制檔案名稱大小寫一致
-    "inlineSourceMap": true, // 產生 inline source map
-    "baseUrl": "./", 
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+
+    /* Coustom */
+    "allowJs": true, // 允許 import js
+    /* Linting */
+    "strict": true, // 嚴格模式
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "inlineSourceMap": true, // 產生 inline source map
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true, // 允許 import default
+    "esModuleInterop": false, // 不使用 esModuleInterop
+    "forceConsistentCasingInFileNames": true, // 強制檔案名稱大小寫一致
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": ["src"]
 }

@@ -1,7 +1,7 @@
-import { ChangeEvent } from 'react'
-import { useState, useEffect, useRef, memo } from 'react'
+import type { ChangeEvent } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
-type TPropsInput = {
+interface TPropsInput {
   name: string
   edit: (id: number, text: string) => void
   id: number
@@ -25,9 +25,7 @@ const Input = memo(({ name, edit, id }: TPropsInput) => {
     //   parentTR?.classList.remove('active')
     // }
 
-    const parentTR = (toggle ? inputRef.current : spanRef.current)?.closest(
-      'tr',
-    )
+    const parentTR = (toggle ? inputRef.current : spanRef.current)?.closest('tr')
     parentTR?.classList[toggle ? 'add' : 'remove']('active')
   }, [toggle])
 
@@ -51,28 +49,29 @@ const Input = memo(({ name, edit, id }: TPropsInput) => {
   }
   return (
     <>
-      {toggle ? (
-        <div className='box bg-violet-100'>
-          {/* 這邊要綁props的text資料才會連動 */}
-          <input
-            ref={inputRef}
-            className='border-0 mb-2 w-160px'
-            type='text'
-            value={text}
-            onChange={handleInputChange}
-          />
-          <button
-            className='border-0 bg-violet-300 py-4px'
-            onClick={handleSave}
-          >
-            更改
-          </button>
-        </div>
-      ) : (
-        <span ref={spanRef} onClick={handleToggle}>
-          {name}
-        </span>
-      )}
+      {
+        toggle
+          ? (
+              <div className="box bg-violet-100">
+                {/* 這邊要綁props的text資料才會連動 */}
+                <input
+                  ref={inputRef}
+                  className="border-0 mb-2 w-160px"
+                  type="text"
+                  value={text}
+                  onChange={handleInputChange}
+                />
+                <button type="button" className="border-0 bg-violet-300 py-4px" onClick={handleSave}>
+                  更改
+                </button>
+              </div>
+            )
+          : (
+              <span ref={spanRef} onClick={handleToggle}>
+                {name}
+              </span>
+            )
+      }
     </>
   )
 })

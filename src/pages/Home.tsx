@@ -9,7 +9,10 @@ const Home: React.FC = () => {
   return (
     <>
       <p>
-        {title}賣 {count}元
+        {title}
+        賣
+        {count}
+        元
       </p>
     </>
   )

@@ -1,15 +1,15 @@
-import { useRoutes } from 'react-router-dom'
 // ===================
 // ... page ...
 // ===================
 import Home from '@/pages/Home'
-import Week1 from "@/pages/Week1"
-import Week2 from "@/pages/Week2"
-import Week3 from "@/pages/Week3"
 // TodoList
 // import Login from "@/component/Login"
 // import SignUp from '@/component/SignUp'
 import Todo from '@/pages/Todo'
+import Week1 from '@/pages/Week1'
+import Week2 from '@/pages/Week2'
+import Week3 from '@/pages/Week3'
+import { useRoutes } from 'react-router-dom'
 
 const routes = [
   {

@@ -1,8 +1,8 @@
+import type { sendObj, TDrinks } from '@/Type'
+import History from '@/component/Order/History'
 import Menu from '@/component/Order/Menu'
 import ShoppingCart from '@/component/Order/ShoppingCart'
-import History from '@/component/Order/History'
-import { useState, Fragment, useMemo } from 'react'
-import { TDrinks, sendObj } from '@/Type'
+import { useMemo, useState } from 'react'
 
 let idx = 1
 const data: TDrinks[] = [
@@ -68,46 +68,47 @@ const Week2: React.FC = () => {
 
   return (
     <>
-      <div className='order py-3'>
-        <Fragment>
-          <h2 className='title text-20px text-center my-3'>飲料點餐系統</h2>
-          <div className='row'>
-            <div className='col-12 col-md-5'>
+      <div className="order py-3">
+        <>
+          <h2 className="title text-20px text-center my-3">飲料點餐系統</h2>
+          <div className="row">
+            <div className="col-12 col-md-5">
               <Menu products={products} cart={cart} setCart={setCart} />
             </div>
-            <div className='col-12 col-md-7'>
-              {cart.length ? (
-                <ShoppingCart
-                  cart={cart}
-                  orderList={orderList}
-                  setCart={setCart}
-                  setOrderList={setOrderList}
-                />
-              ) : (
-                <div className='alert alert-primary mt-20px' role='alert'>
-                  請選擇商品
-                </div>
-              )}
+            <div className="col-12 col-md-7">
+              {cart.length
+                ? (
+                    <ShoppingCart cart={cart} orderList={orderList} setCart={setCart} setOrderList={setOrderList} />
+                  )
+                : (
+                    <div className="alert alert-primary mt-20px" role="alert">
+                      請選擇商品
+                    </div>
+                  )}
             </div>
           </div>
-        </Fragment>
+        </>
         <hr />
-        <Fragment>
-          <h2 className='title text-20px text-center my-3'>歷史訂單</h2>
-          {orderList.length ? (
-            <div className='row gy-3'>
-              {sortOrderList.map((order) => (
-                <div className='col-12 col-md-6' key={order.created}>
-                  <History order={order} setCart={setCart} />
+        <>
+          <h2 className="title text-20px text-center my-3">歷史訂單</h2>
+          {orderList.length
+            ? (
+                <div className="row gy-3">
+                  {
+                    sortOrderList.map(order => (
+                      <div className="col-12 col-md-6" key={order.created}>
+                        <History order={order} setCart={setCart} />
+                      </div>
+                    ))
+                  }
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className='alert alert-info text-center' role='alert'>
-              尚未建立訂單！
-            </div>
-          )}
-        </Fragment>
+              )
+            : (
+                <div className="alert alert-info text-center" role="alert">
+                  尚未建立訂單！
+                </div>
+              )}
+        </>
       </div>
     </>
   )

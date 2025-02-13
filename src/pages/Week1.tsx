@@ -1,6 +1,6 @@
+import type { TDrinks } from '@/Type'
 import Input from '@/component/Input'
-import { useState, useCallback } from 'react'
-import { TDrinks } from '@/Type'
+import { useCallback, useState } from 'react'
 
 let idx = 1
 const data: TDrinks[] = [
@@ -104,20 +104,12 @@ const Week1: React.FC = () => {
           <small>{product.content}</small>
         </td>
         <td>{product.price}</td>
-        <td className='w-200px'>
-          <button
-            type='button'
-            className='button'
-            onClick={() => handlerPatchProduct(product.id, 'cut')}
-          >
+        <td className="w-200px">
+          <button type="button" className="button" onClick={() => handlerPatchProduct(product.id, 'cut')}>
             <span>-</span>
           </button>
-          <span className='inline-block w-20px text-center'>{product.num}</span>
-          <button
-            type='button'
-            className='button'
-            onClick={() => handlerPatchProduct(product.id, 'add')}
-          >
+          <span className="inline-block w-20px text-center">{product.num}</span>
+          <button type="button" className="button" onClick={() => handlerPatchProduct(product.id, 'add')}>
             <span>+</span>
           </button>
         </td>
@@ -126,19 +118,19 @@ const Week1: React.FC = () => {
   }
   return (
     <>
-      <h2 className='title my-3 text-20px'>{str}</h2>
-      <div className='outer'>
-        <table className='table'>
+      <h2 className="title my-3 text-20px">{str}</h2>
+      <div className="outer">
+        <table className="table">
           <thead>
             <tr>
-              <th scope='col'>品項</th>
-              <th scope='col'>描述</th>
-              <th scope='col'>價格</th>
-              <th scope='col'>庫存</th>
+              <th scope="col">品項</th>
+              <th scope="col">描述</th>
+              <th scope="col">價格</th>
+              <th scope="col">庫存</th>
             </tr>
           </thead>
 
-          <tbody>{products.map((product) => handleRender(product))}</tbody>
+          <tbody>{products.map(product => handleRender(product))}</tbody>
         </table>
       </div>
     </>
