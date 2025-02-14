@@ -9,6 +9,7 @@ import Todo from '@/pages/Todo'
 import Week1 from '@/pages/Week1'
 import Week2 from '@/pages/Week2'
 import Week3 from '@/pages/Week3'
+import BeforeEnter from '@/router/beforeEnter'
 import { useRoutes } from 'react-router-dom'
 
 const routes = [
@@ -39,8 +40,12 @@ const routes = [
     // ],
   },
   {
-    path: 'Todo',
-    element: <Todo />,
+    path: '/todo',
+    element: (
+      <BeforeEnter>
+        <Todo />
+      </BeforeEnter>
+    ),
   },
 ]
 

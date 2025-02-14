@@ -1,5 +1,6 @@
 import type { ChangeEvent, MouseEvent } from 'react'
 import TodoList from '@/component/Todo/TodoList'
+import { useUser } from '@/composables/useContext'
 import axios, { AxiosError } from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -7,33 +8,34 @@ import { useNavigate } from 'react-router-dom'
 const { VITE_BASEURL } = import.meta.env
 
 const Todo: React.FC = () => {
-  const [nickname, setNickname] = useState('')
   const [text, setText] = useState('')
   const [todos, setTodos] = useState([])
+
   const navigate = useNavigate()
+  const { nickname } = useUser()
 
   // 元件渲染時 使用useEffect自動執行一次 驗證token
-  const checkOut = useCallback(async () => {
-    try {
-      // 取得 Cookie
-      const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('react-token='))
-        ?.split('=')[1]
-      axios.defaults.headers.common.Authorization = token
-      const res = await axios.get(`${VITE_BASEURL}/users/checkout`)
-      if (res?.status) {
-        console.log('驗證成功', res.data)
-        setNickname(res.data.nickname)
-      }
-    }
-    catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error?.response?.data?.message)
-        navigate('/week3')
-      }
-    }
-  }, [navigate])
+  // const checkOut = useCallback(async () => {
+  //   try {
+  //     // 取得 Cookie
+  //     const token = document.cookie
+  //       .split('; ')
+  //       .find(row => row.startsWith('react-token='))
+  //       ?.split('=')[1]
+  //     axios.defaults.headers.common.Authorization = token
+  //     const res = await axios.get(`${VITE_BASEURL}/users/checkout`)
+  //     if (res?.status) {
+  //       console.log('驗證成功', res.data)
+  //       setNickname(res.data.nickname)
+  //     }
+  //   }
+  //   catch (error) {
+  //     if (error instanceof AxiosError) {
+  //       console.log(error?.response?.data?.message)
+  //       navigate('/week3')
+  //     }
+  //   }
+  // }, [navigate])
 
   // useEffect(() => {
   //   checkOut()
@@ -99,11 +101,10 @@ const Todo: React.FC = () => {
 
   useEffect(() => {
     const init = async () => {
-      await checkOut()
       await handleGetTodo()
     }
     init()
-  }, [handleGetTodo, checkOut])
+  }, [handleGetTodo])
 
   return (
     <div id="todoListPage" className="bg-half">
@@ -116,6 +117,7 @@ const Todo: React.FC = () => {
             <a href="#">
               <span>
                 {nickname}
+                {' '}
                 的代辦
               </span>
             </a>
