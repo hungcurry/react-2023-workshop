@@ -66,6 +66,8 @@ const Week2: React.FC = () => {
     return ary
   }, [orderList])
 
+  const cartrops = { cart, orderList, setCart, setOrderList }
+
   return (
     <>
       <div className="order py-3">
@@ -78,7 +80,7 @@ const Week2: React.FC = () => {
             <div className="col-12 col-md-7">
               {cart.length
                 ? (
-                    <ShoppingCart cart={cart} orderList={orderList} setCart={setCart} setOrderList={setOrderList} />
+                    <ShoppingCart {...cartrops} />
                   )
                 : (
                     <div className="alert alert-primary mt-20px" role="alert">

@@ -30,7 +30,7 @@ const Todo: React.FC = () => {
     catch (error) {
       if (error instanceof AxiosError) {
         console.log(error?.response?.data?.message)
-        navigate('/week3/Login')
+        navigate('/week3')
       }
     }
   }, [navigate])
@@ -72,7 +72,7 @@ const Todo: React.FC = () => {
   }, [])
   // addTodo
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value)
+    setText(e.currentTarget.value)
   }
   const handleAddTodo = async (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()

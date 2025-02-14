@@ -78,22 +78,19 @@ const Week1: React.FC = () => {
     })
     setProducts(ary)
   }
-  const handlerChangeName = useCallback(
-    (id: number, text: string) => {
-      const ary = products.map((product) => {
-        // ~縮寫 return product.id === id ? { ...product, name: text } : product
-        if (product.id === id) {
-          return {
-            ...product,
-            name: text,
-          }
+  const handlerChangeName = useCallback((id: number, text: string) => {
+    const ary = products.map((product) => {
+      // ~縮寫 return product.id === id ? { ...product, name: text } : product
+      if (product.id === id) {
+        return {
+          ...product,
+          name: text,
         }
-        return product
-      })
-      setProducts(ary)
-    },
-    [products],
-  )
+      }
+      return product
+    })
+    setProducts(ary)
+  }, [products])
   const handleRender = (product: TDrinks) => {
     return (
       <tr key={product.id}>

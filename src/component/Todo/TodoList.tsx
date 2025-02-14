@@ -49,7 +49,8 @@ const TodoList = memo(({ todos, handleGetTodo }: TPropsTodo) => {
 
   const handleChangeTag = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    setTag((e.target as HTMLElement)?.textContent || '')
+    // setTag((e.target as HTMLElement)?.textContent || '')
+    setTag(e.currentTarget?.textContent || '')
   }
   const handleToggleState = async (id: string) => {
     try {

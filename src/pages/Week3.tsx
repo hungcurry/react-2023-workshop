@@ -14,7 +14,8 @@ const Week3: React.FC = () => {
   const [tab, setTab] = useState('登入')
   const handleChangeTab = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    setTab((e.target as HTMLElement)?.textContent || '')
+    // setTab((e.target as HTMLElement)?.textContent || '')
+    setTab(e.currentTarget?.textContent || '')
   }
   return (
     <>
